@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Does Your Browser Know?</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #090d18;
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+}
+
+.container {
+    max-width: 650px;
+    width: 100%;
+    background: #141c2e;
+    padding: 35px;
+    border-radius: 18px;
+    border: 1px solid #293752;
+}
+
+h1 {
+    color: #55d6be;
+    text-align: center;
+}
+
+.subtitle {
+    text-align: center;
+    color: #aab5c9;
+    line-height: 1.6;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    background: #55d6be;
+    color: #09121c;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.info {
+    display: none;
+    margin-top: 25px;
+}
+
+.item {
+    background: #202c42;
+    padding: 14px;
+    margin: 10px 0;
+    border-radius: 8px;
+}
+
+.item span {
+    color: #55d6be;
+}
+
+.warning {
+    margin-top: 25px;
+    padding: 18px;
+    background: #30283a;
+    border-left: 4px solid #55d6be;
+    line-height: 1.6;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>What Does Your Browser Know?</h1>
+
+<p class="subtitle">
+You haven't entered any personal information.
+But your browser can already reveal some details.
+</p>
+
+<button onclick="revealInfo()">REVEAL MY DIGITAL FOOTPRINT</button>
+
+<div class="info" id="info">
+
+<h2>Your Browser Revealed:</h2>
+
+<div class="item">
+Browser: <span id="browser"></span>
+</div>
+
+<div class="item">
+Operating System: <span id="system"></span>
+</div>
+
+<div class="item">
+Language: <span id="language"></span>
+</div>
+
+<div class="item">
+Time Zone: <span id="timezone"></span>
+</div>
+
+<div class="item">
+Screen Resolution: <span id="screen"></span>
+</div>
+
+<div class="warning">
+<strong>You didn't tell us anything about yourself...</strong>
+<br><br>
+Yet, your browser revealed some technical information.
+
+Imagine what could happen if you entered your password
+on a fake website!
+</div>
+
+<p style="color:#aab5c9; font-size:13px;">
+This is an educational demonstration.
+No information is collected, transmitted or stored.
+</p>
+
+</div>
+</div>
+
+<script>
+function revealInfo() {
+
+    const ua = navigator.userAgent;
+
+    let browser = "Unknown";
+
+    if (ua.includes("Edg/")) browser = "Microsoft Edge";
+    else if (ua.includes("Chrome/")) browser = "Google Chrome";
+    else if (ua.includes("Firefox/")) browser = "Mozilla Firefox";
+    else if (ua.includes("Safari/")) browser = "Safari";
+
+    let system = "Unknown";
+
+    if (ua.includes("Windows")) system = "Windows";
+    else if (ua.includes("Android")) system = "Android";
+    else if (ua.includes("iPhone")) system = "iOS";
+    else if (ua.includes("Mac OS")) system = "macOS";
+    else if (ua.includes("Linux")) system = "Linux";
+
+    document.getElementById("browser").textContent = browser;
+
+    document.getElementById("system").textContent = system;
+
+    document.getElementById("language").textContent =
+        navigator.language;
+
+    document.getElementById("timezone").textContent =
+        Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+    document.getElementById("screen").textContent =
+        screen.width + " × " + screen.height;
+
+    document.getElementById("info").style.display = "block";
+}
+</script>
+
+</body>
+</html>
